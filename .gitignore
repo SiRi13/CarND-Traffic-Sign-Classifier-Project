@@ -6,3 +6,4 @@ models
 *.p
 *.zip
 lenet*
+sign_net_c*
