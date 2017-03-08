@@ -1,2 +1,2 @@
-model_checkpoint_path: "sign_net_color"
-all_model_checkpoint_paths: "sign_net_color"
+model_checkpoint_path: "sign_net_cv2"
+all_model_checkpoint_paths: "sign_net_cv2"
