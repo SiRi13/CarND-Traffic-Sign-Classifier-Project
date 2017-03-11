@@ -1,0 +1,2 @@
+model_checkpoint_path: "sign_net"
+all_model_checkpoint_paths: "sign_net"
