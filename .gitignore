@@ -6,3 +6,4 @@ models
 *.p
 *.zip
 lenet*
+__pycache__/*
