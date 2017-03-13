@@ -19,19 +19,19 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[Overview]: ./images/signs_overview.png "Traffic Signs Overview"
+[overview]: ./images/signs_overview.png "Traffic Signs Overview"
 [distribution]: ./images/distribution.png "Distribution of Images by Labels"
-[Augmentation]: ./images/image_augmentation.png "Example Image with different Augmentation Techniques"
-[DistributionAugmented]: ./images/distribution_augmented.png "Distribution with Augmented Data"
-[MeanOfImageSets]: ./images/mean_of_sets.png "Mean Values from Image Sets before and after Normalization"
-[AugmentedOriginal]: ./images/augmented_original_compared.png "Random Augmented Data Compared To Examples From Original Images"
-[AugmentedNormalizedOriginal]: ./images/augmented_normalized_original.png "Random Normalized Images Compared To Random Original Images"
-[NormalizedNew]: ./images/normalized_new.png "Normalized New Image Compared To Original New Image And Similar From GTSRB Set"
-[PredictionExample]: ./images/predicted_0.png "Example Of Predicted Image with Softmax Distribution"
-[PredictionExampleNeg]: ./images/predicted_3.png "Example Of Wrong Prediction"
-[VisualizationImages]: ./images/visualization_source_images.png "Test Images For Network Visualization"
-[VisualizationOutputConv1]: ./images/visualization_conv1.png "Output of Convolutional Layer #1"
-[VisualizationOutputConv2]: ./images/visualization_conv2.png "Output of Convolutional Layer #2"
+[augmentation]: ./images/image_augmentation.png "Example Image with different Augmentation Techniques"
+[distributionAugmented]: ./images/distribution_augmented.png "Distribution with Augmented Data"
+[meanOfImageSets]: ./images/mean_of_sets.png "Mean Values from Image Sets before and after Normalization"
+[augmentedOriginal]: ./images/augmented_original_compared.png "Random Augmented Data Compared To Examples From Original Images"
+[augmentedNormalizedOriginal]: ./images/augmented_normalized_original.png "Random Normalized Images Compared To Random Original Images"
+[normalizedNew]: ./images/normalized_new.png "Normalized New Image Compared To Original New Image And Similar From GTSRB Set"
+[predictionExample]: ./images/predicted_0.png "Example Of Predicted Image with Softmax Distribution"
+[predictionExampleNeg]: ./images/predicted_3.png "Example Of Wrong Prediction"
+[visualizationImages]: ./images/visualization_source_images.png "Test Images For Network Visualization"
+[visualizationOutputConv1]: ./images/visualization_conv1.png "Output of Convolutional Layer #1"
+[visualizationOutputConv2]: ./images/visualization_conv2.png "Output of Convolutional Layer #2"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -49,7 +49,7 @@ You're reading it! and here is a link to my
 
 ####1. Provide a basic summary of the data set and identify where in your code the summary was done. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-The code for this step is contained in the [second code cell](https://github.com/SiRi13/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb#basic-summary-1) of the IPython notebook.  
+The code for this step is contained in the [third code cell](Traffic_Sign_Classifier.ipynb#basic-summary-1) of the IPython notebook.  
 
 I used the numpy library to calculate summary statistics of the traffic signs data set:
 
@@ -64,10 +64,11 @@ corresponding label list.
 
 ####2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
 
-The code for this step is contained in the [third code cell](#third) of the IPython notebook.  
+In the [seventh code cell](Traffic_Sign_Classifier.ipynb#thumbnails) of the notebook I print an random image of each class with its corresponding label.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data is distributed across the classes.
-This clearly shows how the amount of images per class varies over the training data set.
+![Overview of sign images][overview]
+
+To see how many images each class contains I plotted bar chart in [cell eight](./Traffic_Sign_Classifier.ipynb#distribution) which shows how the data is distributed across the classes. This clearly shows how the amount of images varies per class in the training data set.
 
 ![Distribution of amount of images across the labels][distribution]
 
@@ -76,33 +77,43 @@ This clearly shows how the amount of images per class varies over the training d
 
 ####1. Describe how, and identify where in your code, you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
 
-The code for this step is contained in the code cell below [Normalization](#Normalization).
+The code for this step is contained in the code cell [Normalization](./Traffic_Sign_Classifier.ipynb#normalization).
 
-First step of preprocessing is 
-This will improve the global contrast of most pictures.
-After 
+First step of preprocessing is equalizing the histogram of each image.
+This will increase the global contrast for most images and therefore improve accuracy of the network.
+The second step is conversion to grayscale which improves in combination with normalization in step three the network speed as well as its accuracy. 
 
-Here is an example of a traffic sign image before and after grayscaling.
+Here is an example of twelve different signs of six classes. The processed image on the left hand side and respectively an similar from the original set on the right hand side.
 
-![alt text][image2]
+![Normalized images compared with similar originals][augmentedNormalizedOriginal]
 
-As a last step, I normalized the image data because ...
+As shown in the following bar chart, the mean value of the train and test set dropped from over 80 to almost 0 on the right hand side after normalizing.
+
+![Mean Value Of Image Sets][meanOfImageSets]
 
 ####2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
-The code for splitting the data into training and validation sets is contained in the fifth code cell of the IPython notebook.  
+There was no splitting in test, validation and training data necessary because there were already split sets in seperate files available.
 
-To cross validate my model, I randomly split the training data into a training set and validation set. I did this by ...
+Before balancing the training set I had *34799* images for training, *4410* for validating and *12630* for testing.  
+Since I only expanded the training set, validation and test set stayed the same.
 
-My final training set had X number of images. My validation set and test set had Y and Z number of images.
+![Balanced Training Set][distributionAugmented]
 
-The sixth code cell of the IPython notebook contains the code for augmenting the data set. I decided to generate additional data because ... To add more data to the the data set, I used the following techniques because ... 
+For the training set I created in [code cell sixteen](./Traffic_Sign_Classifier.ipynb#augmentation) *51382* images by rotating, translating and equalizing the Y-value as shown below.
 
+![Augmentation Examples][augmentation]
+
+I decided to augment and balance the training set because more data is always better and to reduce affects of bad distributed data. This could lead to worse recall of similar images with different amounts of data.  
+Lets take Class #35 and #36 for example. The original set had about 1000 images of #35 and only a little over 250 of #36.
+With those numbers the network sees #35 about four times more often and therefore can recognize it better than #36.
+Since they are pretty similar, #35 is Ahead Only and #36 is Straight Or Right, the network will tend to predict #35.
+With augmented data the network gets about the same number of images from any class which recudes the risk of tendencies towards images with higher numbers.
 Here is an example of an original image and an augmented image:
 
-![alt text][image3]
+![Augmented and Original Image][augmentedOriginal]
 
-The difference between the original data set and the augmented data set is the following ... 
+My final training set has *86181* images which makes about 2000 images per class as shown in [this bar chart](#distributionAugmented).
 
 
 ####3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
