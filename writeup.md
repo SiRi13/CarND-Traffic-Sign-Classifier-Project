@@ -19,14 +19,19 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[Overview]: ./images/signs_overview.png "Traffic Signs Overview"
+[distribution]: ./images/distribution.png "Distribution of Images by Labels"
+[Augmentation]: ./images/image_augmentation.png "Example Image with different Augmentation Techniques"
+[DistributionAugmented]: ./images/distribution_augmented.png "Distribution with Augmented Data"
+[MeanOfImageSets]: ./images/mean_of_sets.png "Mean Values from Image Sets before and after Normalization"
+[AugmentedOriginal]: ./images/augmented_original_compared.png "Random Augmented Data Compared To Examples From Original Images"
+[AugmentedNormalizedOriginal]: ./images/augmented_normalized_original.png "Random Normalized Images Compared To Random Original Images"
+[NormalizedNew]: ./images/normalized_new.png "Normalized New Image Compared To Original New Image And Similar From GTSRB Set"
+[PredictionExample]: ./images/predicted_0.png "Example Of Predicted Image with Softmax Distribution"
+[PredictionExampleNeg]: ./images/predicted_3.png "Example Of Wrong Prediction"
+[VisualizationImages]: ./images/visualization_source_images.png "Test Images For Network Visualization"
+[VisualizationOutputConv1]: ./images/visualization_conv1.png "Output of Convolutional Layer #1"
+[VisualizationOutputConv2]: ./images/visualization_conv2.png "Output of Convolutional Layer #2"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -44,34 +49,38 @@ You're reading it! and here is a link to my
 
 ####1. Provide a basic summary of the data set and identify where in your code the summary was done. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-The code for this step is contained in the second code cell of the IPython notebook.  
+The code for this step is contained in the [second code cell](https://github.com/SiRi13/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb#basic-summary-1) of the IPython notebook.  
 
-I used the numpy library to calculate summary statistics of the traffic
-signs data set:
+I used the numpy library to calculate summary statistics of the traffic signs data set:
 
-* The size of training set is *34799*
-* The size of test set is *12630*
-* The shape of a traffic sign image is *(32, 32, 3)*
+* The size of the original training set is *34799*
+* The size of the original test set is *12630*
+* The shape of a traffic sign image before processing it is *(32, 32, 3)*
 * The number of unique classes/labels in the data set is *43*
 
 To be sure in each set are the same amount of labels and pictures, I compared the length of each image list with their 
 corresponding label list.
 
+
 ####2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
 
-The code for this step is contained in the third code cell of the IPython notebook.  
+The code for this step is contained in the [third code cell](#third) of the IPython notebook.  
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+Here is an exploratory visualization of the data set. It is a bar chart showing how the data is distributed across the classes.
+This clearly shows how the amount of images per class varies over the training data set.
 
-![alt text][image1]
+![Distribution of amount of images across the labels][distribution]
+
 
 ###Design and Test a Model Architecture
 
-####1. Describe how, and identify where in your code, you preprocessed the image data. What tecniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
+####1. Describe how, and identify where in your code, you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
 
-The code for this step is contained in the fourth code cell of the IPython notebook.
+The code for this step is contained in the code cell below [Normalization](#Normalization).
 
-As a first step, I decided to convert the images to grayscale because ...
+First step of preprocessing is 
+This will improve the global contrast of most pictures.
+After 
 
 Here is an example of a traffic sign image before and after grayscaling.
 
