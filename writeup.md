@@ -26,9 +26,20 @@ The goals / steps of this project are the following:
 [meanOfImageSets]: ./images/mean_of_sets.png "Mean Values from Image Sets before and after Normalization"
 [augmentedOriginal]: ./images/augmented_original_compared.png "Random Augmented Data Compared To Examples From Original Images"
 [augmentedNormalizedOriginal]: ./images/augmented_normalized_original.png "Random Normalized Images Compared To Random Original Images"
+[newRaw]: ./images/new_images_raw.png "New images from Google Maps"
 [normalizedNew]: ./images/normalized_new.png "Normalized New Image Compared To Original New Image And Similar From GTSRB Set"
 [predictionExample]: ./images/predicted_0.png "Example Of Predicted Image with Softmax Distribution"
-[predictionExampleNeg]: ./images/predicted_3.png "Example Of Wrong Prediction"
+[predictionExample2]: ./images/predicted_1.png "Example Of Predicted Image with Softmax Distribution"
+[predictionExample3]: ./images/predicted_2.png "Example Of Predicted Image with Softmax Distribution"
+[predictionExample4]: ./images/predicted_3.png "Example Of Predicted Image with Softmax Distribution"
+[predictionExample5]: ./images/predicted_5.png "Example Of Predicted Image with Softmax Distribution"
+[predictionExample6]: ./images/predicted_7.png "Example Of Predicted Image with Softmax Distribution"
+[predictionExample7]: ./images/predicted_10.png "Example Of Predicted Image with Softmax Distribution"
+[predictionExampleNeg]: ./images/predicted_4.png "Example Of Wrong Prediction"
+[predictionExampleNeg2]: ./images/predicted_6.png "Example Of Wrong Prediction"
+[predictionExampleNeg3]: ./images/predicted_8.png "Example Of Wrong Prediction"
+[predictionExampleNeg4]: ./images/predicted_9.png "Example Of Wrong Prediction"
+
 [visualizationImages]: ./images/visualization_source_images.png "Test Images For Network Visualization"
 [visualizationOutputConv1]: ./images/visualization_conv1.png "Output of Convolutional Layer #1"
 [visualizationOutputConv2]: ./images/visualization_conv2.png "Output of Convolutional Layer #2"
@@ -49,7 +60,7 @@ You're reading it! and here is a link to my
 
 ####1. Provide a basic summary of the data set and identify where in your code the summary was done. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-The code for this step is contained in the [third code cell](Traffic_Sign_Classifier.ipynb#basic-summary-1) of the IPython notebook.  
+The code for this step is contained in the third code cell below the header [Provide a Basic Summary of the Data Set Using Python, Numpy and/or Pandas](./Traffic_Sign_Classifier.ipynb#Provide-a-Basic-Summary-of-the-Data-Set-Using-Python,-Numpy-and/or-Pandas) of the IPython notebook.  
 
 I used the numpy library to calculate summary statistics of the traffic signs data set:
 
@@ -64,11 +75,11 @@ corresponding label list.
 
 ####2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
 
-In the [seventh code cell](Traffic_Sign_Classifier.ipynb#thumbnails) of the notebook I print an random image of each class with its corresponding label.
+After heading [Thumbnails](./Traffic_Sign_Classifier.ipynb#Thumbnails) of the notebook I print an random image of each class with its corresponding label.
 
 ![Overview of sign images][overview]
 
-To see how many images each class contains I plotted bar chart in [cell eight](./Traffic_Sign_Classifier.ipynb#distribution) which shows how the data is distributed across the classes. This clearly shows how the amount of images varies per class in the training data set.
+To see how many images each class contains I plotted bar chart in after [Distribution](./Traffic_Sign_Classifier.ipynb#Distribution) which shows how the data is distributed across the classes. This clearly shows how the amount of images varies per class in the training data set.
 
 ![Distribution of amount of images across the labels][distribution]
 
@@ -77,7 +88,7 @@ To see how many images each class contains I plotted bar chart in [cell eight](.
 
 ####1. Describe how, and identify where in your code, you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
 
-The code for this step is contained in the code cell [Normalization](./Traffic_Sign_Classifier.ipynb#normalization).
+The code for this step is contained in the code cell [Normalization](./Traffic_Sign_Classifier.ipynb#Normalization).
 
 First step of preprocessing is equalizing the histogram of each image.
 This will increase the global contrast for most images and therefore improve accuracy of the network.
@@ -98,9 +109,7 @@ There was no splitting in test, validation and training data necessary because t
 Before balancing the training set I had *34799* images for training, *4410* for validating and *12630* for testing.  
 Since I only expanded the training set, validation and test set stayed the same.
 
-![Balanced Training Set][distributionAugmented]
-
-For the training set I created in [code cell sixteen](./Traffic_Sign_Classifier.ipynb#augmentation) *51382* images by rotating, translating and equalizing the Y-value as shown below.
+For the training set I created in [Augmentation](./Traffic_Sign_Classifier.ipynb#Augmentation) *51382* images by rotating, translating and equalizing the Y-value as shown below.
 
 ![Augmentation Examples][augmentation]
 
@@ -113,56 +122,67 @@ Here is an example of an original image and an augmented image:
 
 ![Augmented and Original Image][augmentedOriginal]
 
-My final training set has *86181* images which makes about 2000 images per class as shown in [this bar chart](#distributionAugmented).
+My final training set has *86181* images which makes about 2000 images per class as shown in this bar chart:
 
+![Balanced Training Set][distributionAugmented]
 
 ####3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-The code for my final model is located in the seventh cell of the ipython notebook. 
+The code for my final model is located in the code cells below header [Model Architecture](./Traffic_Sign_Classifier.ipyng#Model-Architecture) of the ipython notebook. 
 
-My final model consisted of the following layers:
+My final model consists of the following layers:
 
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
+|#| Layer | Description | 
+|---:|:--- |:--- |
+|0| Input | 32x32x1 grayscale image | 
+| | 						|												|
+|1| Convolution 3x3		| 1x1 stride, valid padding, outputs 30x30x100 	|
+| | ReLU					|												|
+| | Max pooling			| 2x2 stride, 2x2 kernel, outputs 15x15x100		|
+| | 						|												|
+|2| Convolution 4x4     	| 1x1 stride, valid padding, outputs 12x12x150 	|
+| | ReLU					|												|
+| | Max pooling			| 2x2 stride, 2x2 kernel, outputs 6x6x150		|
+| | 						|												|
+|3| Convolution 4x4	    | 1x1 stride, same padding, outputs 6x6x250 	|
+| | ReLU					|												|
+| | Max pooling			| 1x1 stride, 1x1 kernel, outputs 6x6x250		|
+| | 						|												|
+|4| Flatten				| outputs (9000)								|
+| | 						|												|
+|5| Fully connected		| outputs (200)									|
+| | ReLU					|												|
+| | Drop-out				| keep probability: 50%							|
+| | 						|												|
+|6| Fully connected		| outputs (43)									|
+| | ReLU					|												|
+| | Drop-out				| keep probability: 50%							|
+| | 						|												|
+|7| Fully connected		| outputs (43)									|
+| |						|												|
+|8| Softmax				|												|
  
-
 
 ####4. Describe how, and identify where in your code, you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-The code for training the model is located in the eigth cell of the ipython notebook. 
+The code for training the model is located in the cells after [Training](./Traffic_Sign_Classifier.ipynb#Training) of the ipython notebook. 
 
-To train the model, I used an ....
+To train the model, I used *25* epochs with a batch size of *128*. I used the same functions for calculating cross entropy and loss as the _LeNet_ network as well as the same *AdamOptimizer* with a learning rate of *0.001*.
 
 ####5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
-The code for calculating the accuracy of the model is located in the ninth cell of the Ipython notebook.
+The code for calculating the accuracy of the model is located below the [Accuracy](./Traffic_Sign_Classifier.ipynb#Training) cell of the Ipython notebook.
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* validation set accuracy of almost 99% 
+* test set accuracy of 96.5%
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to over fitting or under fitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
-
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+First approach was the _LeNet_ architecture as mentioned in the introdution video by David Silver which reached about 88% with the test data.  
+Next I implemented the normalization and augmentation of the data.
+Since I changed the color and therefore the shape of the images from *32x32x3* to *32x32x1* the network had to be changed to.
+So I added one convolutional layer and and drop-out between the fully connected layer.
+The test accuracy jumped right up to 95%. Since *sermanet* from Pierre Sermanet and Yann LeCun used very high feature counts, I increased the depth as well to *100*, *150* and *250* for the convolutional layers and *200* for the first fully connected.  
+This architecture reached almost 99% with the validation set and 96.5% with test data. So I moved on.
 
 ###Test a Model on New Images
 
@@ -170,41 +190,61 @@ If a well known architecture was chosen:
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![New traffic sign images from Google Maps][newRaw]
 
-The first image might be difficult to classify because ...
+Image three might be hard to predict because the actual traffic sign is smaller and there is an additional sign on it as well.
+Last three images are not in the dataset so it is not possible to predict a correct one. 
+But #29 - Bicycles Crossing looks similar to the Bike Lane Sign as well as the other two.
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
-The code for making predictions on my final model is located in the tenth cell of the Ipython notebook.
+The code for making predictions on my final model is located below [Predict the Sign Type for Each Image](./Traffic_Sign_Classifier.ipynb#Predict-the-Sign-Type-for-Each-Image).
 
-Here are the results of the prediction:
+Before I started the in-depth analysis of the predictions, I run the images with the `evaluate` function.
+Result was *63.6*%.
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+Here are the real results of the prediction:
 
+| Image | Prediction | 
+|:----- |:-----------| 
+| Ahead Only | Stop sign | 
+| Stop | Stop |
+| Priority Road | Priority Road |
+| No Vehicles | End of No Passing |
+| Road Work | Road Work |
+| No Parking (NIL) | Priority Road |
+| No Entry | No Entry |
+| General Caution | General Caution |
+| Ped/Bike Lane | Stop |
+| Bike Lane | No Vehicles |
+| Turn Right Ahead | Turn Right Ahead |
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess **seven** of the **eleven** traffic signs, which gives an accuracy of 63.6%.
+Considering that three are not in the original set it actually was much higher and therefore a lot closer to the test accuracy of 96.5%
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is below [Predict the Sign Type for Each Image](./Traffic_Sign_Classifier.ipynb#Predict-the-Sign-Type-for-Each-Image) as well.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+The model was always very certain about its predictions almost always 100%
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+![100% Prediction][predictionExample]
 
+Even wrong predictions were very high and mostly 100%.
 
-For the second image ... 
+![100% Prediction Wrong][predictionExampleNeg]
+
+Only one of wrong predicted images got a wide spread softmax distribution of the probabilities.
+
+![Distributed Probabilties][predictionExampleNeg2]
+
+All other results:
+
+![Stop Result][predictionExample2]
+![Priority Road Result][predictionExample3]
+![Road Work Result][predictionExample4]
+![No Parking Result][predictionExampleNeg3]
+![No Entry Result][predictionExample5]
+![General Caution Result][predictionExample6]
+![Ped/Bike Lane Result][predictionExampleNeg4]
+![Turn Right Ahead Only Result][predictionExample7]
