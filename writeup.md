@@ -176,14 +176,14 @@ The code for calculating the accuracy of the model is located in the [Accuracy](
 
 My final model results were:
 * validation set accuracy of almost 99% 
-* test set accuracy of 96.5%
+* test set accuracy of 96.2%
 
 First approach was the _LeNet_ architecture as mentioned in the introdution video by David Silver which reached about 88% with the test data.  
 As the input data is always a good start to improve a network, I implemented the normalization and augmentation of the data.
 Since I changed the color and therefore the shape of the images from *32x32x3* to *32x32x1* the network had to be changed to.
 While at it I also added one convolutional layer and drop-outs between the fully connected layers
 The test accuracy jumped right up to 95%. Since *sermanet* from Pierre Sermanet and Yann LeCun used very high feature counts, I increased the depth as well to *100*, *150* and *250* for the convolutional layers and *200* for the first fully connected.  
-This architecture reached almost 99% with the validation set and 96.5% with test data. 
+This architecture reached almost 99% with the validation set and 96.2% with test data. 
 
 ###Test a Model on New Images
 
