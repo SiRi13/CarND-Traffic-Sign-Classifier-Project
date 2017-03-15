@@ -54,7 +54,7 @@ The goals / steps of this project are the following:
 
 You're reading it! and here is a link to my
 * [project code](https://github.com/SiRi13/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
-* [writeup.pdf](https://github.com/SiRi13/CarND-Traffic-Sign-Classifier-Project/blob/master/writeup.pdf)
+* [writeup.html](https://github.com/SiRi13/CarND-Traffic-Sign-Classifier-Project/blob/master/writeup.html)
 
 ###Data Set Summary & Exploration
 
